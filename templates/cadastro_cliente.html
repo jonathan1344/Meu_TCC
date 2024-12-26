@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Cadastro de Cliente</h1>
+        <div class="logout">
+            <a href="/painel">Painel</a>
+            <a href="#" id="btn-pesquisar-menu">Pesquisar</a> <!-- Alterado para acionar a pesquisa -->
+            <a href="/logout">Sair</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="form-section">
+            <h3>Cadastro de Clientes</h3>
+            <form id="form-cliente" method="POST" action="/cadastro_cliente">
+                <input type="hidden" id="id" name="id">
+
+                <label for="cnpj">CNPJ:</label>
+                <input type="text" id="cnpj" name="cnpj" required>
+
+                <label for="razao_social">Razão Social:</label>
+                <input type="text" id="razao_social" name="razao_social" required>
+
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco">
+
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade">
+
+                <label for="uf">UF:</label>
+                <input type="text" id="uf" name="uf">
+
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" name="cep">
+
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais">
+
+                <label for="necessario_po">Necessário PO:</label>
+                <input type="checkbox" id="necessario_po" name="necessario_po">
+
+                <label for="projeto_principal">Projeto Principal:</label>
+                <input type="text" id="projeto_principal" name="projeto_principal">
+
+                <label for="tipo_contrato">Tipo de Contrato:</label>
+                <select id="tipo_contrato" name="tipo_contrato">
+                    <option value="comum">Comum</option>
+                    <option value="especial">Especial</option>
+                </select>
+
+                <label for="moeda">Moeda:</label>
+                <input type="text" id="moeda" name="moeda">
+
+                <label for="movimentacao">Movimentação:</label>
+                <input type="text" id="movimentacao" name="movimentacao">
+
+                <label for="seguro">Seguro:</label>
+                <input type="checkbox" id="seguro" name="seguro">
+
+                <label for="fat_min_hora">Faturamento Mínimo por Hora:</label>
+                <input type="number" id="fat_min_hora" name="fat_min_hora" step="0.01">
+
+                <label for="analise_nc">Análise NC:</label>
+                <input type="text" id="analise_nc" name="analise_nc">
+
+                <label for="rebate">Rebate:</label>
+                <input type="number" id="rebate" name="rebate" step="0.01">
+
+                <label for="abertura_projeto">Abertura de Projeto:</label>
+                <input type="text" id="abertura_projeto" name="abertura_projeto">
+
+                <label for="reatividade">Reatividade:</label>
+                <input type="text" id="reatividade" name="reatividade">
+
+                <label for="percentual_he_semana">Percentual HE Semana:</label>
+                <input type="number" id="percentual_he_semana" name="percentual_he_semana" step="0.01">
+
+                <label for="administrativo">Administrativo:</label>
+                <input type="text" id="administrativo" name="administrativo">
+
+                <label for="frete">Frete:</label>
+                <input type="number" id="frete" name="frete" step="0.01">
+
+                <label for="percentual_he_sabado">Percentual HE Sábado:</label>
+                <input type="number" id="percentual_he_sabado" name="percentual_he_sabado" step="0.01">
+
+                <label for="warehouse">Warehouse:</label>
+                <input type="text" id="warehouse" name="warehouse">
+
+                <label for="percentual_he_domingo">Percentual HE Domingo:</label>
+                <input type="number" id="percentual_he_domingo" name="percentual_he_domingo" step="0.01">
+
+                <label for="percentual_ad_noturno">Percentual Adicional Noturno:</label>
+                <input type="number" id="percentual_ad_noturno" name="percentual_ad_noturno" step="0.01">
+
+                <button type="submit" class="btn-green">Salvar</button>
+                <button type="button" class="btn-red" onclick="window.location.href='/painel'">Cancelar</button>
+            </form>
+
+            {% if mensagem_sucesso %}
+            <div class="message-container">{{ mensagem_sucesso }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Caixa de diálogo para pesquisa -->
+    <div class="popup-overlay"></div>
+    <div class="popup dialog-box">
+        <h3>Pesquisar Cliente</h3>
+        <input type="text" id="input-pesquisar" placeholder="Digite o nome do cliente">
+        <button id="btn-pesquisar-popup" class="btn-green btn-pesquisar-popup">Pesquisar</button>
+        <button class="btn-red btn-fechar" onclick="document.querySelector('.popup').style.display='none'; document.querySelector('.popup-overlay').style.display='none';">Fechar</button>
+    </div>
+
+    <script>
+        // Evento para abrir a caixa de diálogo ao clicar em "Pesquisar"
+        document.getElementById('btn-pesquisar-menu').addEventListener('click', function(event) {
+            event.preventDefault(); // Impede a navegação
+            document.querySelector('.popup-overlay').style.display = 'block';
+            document.querySelector('.popup').style.display = 'block';
+        });
+
+        // Evento para pesquisar cliente
+        document.getElementById('btn-pesquisar-popup').addEventListener('click', function() {
+            var nome = document.getElementById('input-pesquisar').value;
+            fetch('/pesquisar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nome: nome })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    var cliente = data[0];
+                    document.getElementById('id').value = cliente.id;
+                    document.getElementById('razao_social').value = cliente.razao_social;
+                    document.getElementById('cnpj').value = cliente.cnpj;
+                    document.getElementById('moeda').value = cliente.moeda;
+                    document.getElementById('movimentacao').value = cliente.movimentacao;
+                    document.getElementById('seguro').value = cliente.seguro;
+                    document.getElementById('nome_fantasia').value = cliente.nome_fantasia;
+                    document.getElementById('administrativo').value = cliente.administrativo;
+                    document.getElementById('fat_min').value = cliente.fat_min;
+                    document.getElementById('analise_nc').value = cliente.analise_nc;
+                    document.getElementById('rebate').value = cliente.rebate;
+                    document.getElementById('abertura_projeto').value = cliente.abertura_projeto;
+                    document.getElementById('reatividade').value = cliente.reatividade;
+                    document.getElementById('supervisor_cliente').value = cliente.supervisor_cliente;
+                    document.getElementById('frete').value = cliente.frete;
+                    document.getElementById('warehouse').value = cliente.warehouse;
+                    document.getElementById('he_semana').value = cliente.he_semana;
+                    document.getElementById('he_sabado').value = cliente.he_sabado;
+                    document.getElementById('he_domingo').value = cliente.he_domingo;
+                    document.getElementById('he_feriado').value = cliente.he_feriado;
+                    document.getElementById('ad_noturno').value = cliente.ad_noturno;
+                    document.getElementById('po').checked = cliente.po == 1;
+
+                    // Fecha a caixa de diálogo após a pesquisa
+                    document.querySelector('.popup').style.display = 'none';
+                    document.querySelector('.popup-overlay').style.display = 'none';
+                } else {
+                    alert('Cliente não encontrado.');
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        });
+
+        // Oculta a mensagem de sucesso após 3 segundos
+        if (document.querySelector('.message-container')) {
+            setTimeout(function() {
+                document.querySelector('.message-container').style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

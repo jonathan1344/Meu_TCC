@@ -1,0 +1,89 @@
+body {
+    background-image: url('/static/Imagens/tela_login.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000; /* Letras em preto */
+    font-family: Arial, sans-serif;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.8); /* Fundo semitransparente */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #000; /* Letras em preto */
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #000; /* Letras em preto */
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #fff;
+    color: #000; /* Letras em preto */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #045d56, #06b7a9);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #06b7a9, #045d56);
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    color: #000; /* Letras em preto */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.caps-warning {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

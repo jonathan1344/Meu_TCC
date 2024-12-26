@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+    <div class="container">
+        <form action="/" method="POST">
+            <h1>Faça seu login</h1>
+            
+            <!-- Exibição de mensagem de erro, se existir -->
+            {% if erro %}
+                <p class="error-message">{{ erro|safe }}</p>
+            {% endif %}
+
+            <label for="usuario">Login:</label>
+            <input type="text" id="usuario" name="usuario" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+
+            <!-- Alerta de Caps Lock -->
+            <p class="caps-warning" id="capsWarning">Caps Lock está ativado!</p>
+
+            <button type="submit">Entrar</button>
+            <a href="#">Esqueci minha senha</a>
+        </form>
+    </div>
+
+    <script>
+        // Detectar Caps Lock ativado
+        document.getElementById('senha').addEventListener('keyup', function(event) {
+            const capsWarning = document.getElementById('capsWarning');
+            if (event.getModifierState('CapsLock')) {
+                capsWarning.style.display = 'block';
+            } else {
+                capsWarning.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+

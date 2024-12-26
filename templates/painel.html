@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div class="header">
+        <div class="titulo">PAINEL</div>
+        <div class="logout">
+            {{ nome }} | <a href="/logout">Sair</a>
+        </div>
+    </div>
+    <div class="menu">
+        <ul>
+            <li><a href="/lancamentos_horas"><img src="/static/Imagens/lançamento_de_horas.png" alt="Ícone de Lançamentos de Horas"><span>LANÇAMENTOS</span></a></li>
+            <li><a href="/novo_projeto"><img src="/static/Imagens/novo_projeto.png" alt="Ícone de Novo Projeto"><span>NOVO PROJETO</span></a></li>
+            <li><a href="/eficiencia"><img src="/static/Imagens/eficiencia.png" alt="Ícone de Eficiência"><span>EFICIÊNCIA</span></a></li>
+            <li><a href="/report"><img src="/static/Imagens/report1.png" alt="Ícone de Relatório"><span>RELATÓRIOS</span></a></li>
+            <li><a href="/exportar"><img src="/static/Imagens/exportar.png" alt="Ícone de Exportar"><span>EXPORTAR</span></a></li>
+            <li><a href="/importar_apontamentos"><img src="/static/Imagens/importar.png" alt="Ícone de Importar Apontamentos"><span>IMPORTAR</span></a></li>
+            <li><a href="/project_list_callup"><img src="/static/Imagens/projest_list.png" alt="Ícone de Chamada de Lista de Projetos"><span>LISTA DE PROJETOS</span></a></li>
+            <li><a href="/time_sheet_callup"><img src="/static/Imagens/timesheet.png" alt="Ícone de Folha de Horário Chamada"><span>FOLHA DE HORÁRIO</span></a></li>
+            <li><a href="/consultar_projeto"><img src="/static/Imagens/consulta.png" alt="Ícone de Consultar Projeto"><span>CONSULTAS</span></a></li>
+            <li><a href="/gestao_funcionario"><img src="/static/Imagens/gestão.png" alt="Ícone de Gestão de Funcionário"><span>GESTÃO</span></a></li>
+            <li><a href="/validacao_horas"><img src="/static/Imagens/validação.png" alt="Ícone de Validação de Horas"><span>VALIDAÇÃO DE HORAS</span></a></li>
+            <li><a href="/validacao_kairos"><img src="/static/Imagens/validação_de_kairos.png" alt="Ícone de Validação de Kairos"><span>VALIDAÇÃO DE KAIROS</span></a></li>
+            <li><a href="/cadastro_cliente"><img src="/static/Imagens/cadastros.png" alt="Ícone de Cadastros"><span>CADASTRO DE CLIENTE</span></a></li>
+            <li><a href="/cadastros_de_usuarios"><img src="/static/Imagens/cadastro_de_usuarios.png" alt="Ícone de Cadastros de Usuarios"><span>CADASTROS DE USUARIOS</span></a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <!-- Conteúdo do painel -->
+    </div>
+</body>
+</html>

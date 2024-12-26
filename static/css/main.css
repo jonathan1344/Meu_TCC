@@ -1,0 +1,232 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/static/Imagens/tela_login.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    color: #333;
+}
+
+/* Container com fundo */
+.container {
+    background-color: rgba(223, 252, 237, 0.45);
+    padding: 20px;
+    border-radius: 10px; /* Arredondar as bordas */
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333; /* Faixa preta */
+    color: #fff;
+    padding: 15px 20px; /* Aumentar o padding para aumentar a altura */
+}
+
+.header .titulo {
+    font-size: 36px; /* Tamanho maior para o título */
+    font-weight: bold; /* Negrito */
+}
+
+.header .logout {
+    font-size: 18px; /* Tamanho maior para o nome do usuário e link Sair */
+    font-weight: bold; /* Negrito */
+}
+
+.header .logout a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.header .logout a:hover {
+    text-decoration: underline; /* Sublinha ao passar o mouse */
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0; /* Remover o fundo branco */
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 itens na primeira linha */
+    gap: 30px; /* Aumentar o espaçamento entre os itens */
+}
+
+.menu ul li {
+    text-align: center;
+    position: relative; /* Para o efeito de fundo ao passar o mouse */
+}
+
+.menu ul li img {
+    width: 150px; /* Tamanho ajustado */
+    height: 150px; /* Tamanho ajustado */
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.menu ul li span {
+    display: block;
+    color: #000; /* Letras em preto */
+    font-size: 16px;
+    font-weight: bold; /* Negrito para os textos abaixo das imagens */
+}
+
+.menu ul li a {
+    color: #000; /* Cor preta para os links */
+    text-decoration: none; /* Sem sublinhado por padrão */
+    padding: 10px; /* Espaçamento interno para o efeito de fundo */
+}
+
+.menu ul li a:hover {
+    text-decoration: underline; /* Sublinha ao passar o mouse */
+}
+
+.menu ul li:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(223, 252, 237, 0.45); /* Fundo claro ao passar o mouse */
+    z-index: -10; /* Colocar o fundo atrás do texto */
+    border-radius: 10px; /* Arredondar as bordas */
+}
+
+.menu ul li:nth-child(n+11) { /* A partir do 11º item, mudar para 4 colunas */
+    grid-template-columns: repeat(4, 1fr); /* 4 itens na última linha */
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+}
+
+button, input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Botão verde */
+button.btn-green, input[type="submit"].btn-green {
+    background: #0a850c; /* Verde vivo */
+    color: #fff; /* Letras brancas */
+    font-weight: bold; /* Negrito */
+    text-transform: uppercase; /* Todas maiúsculas */
+}
+
+button.btn-green:hover, input[type="submit"].btn-green:hover {
+    background: #086508; /* Verde mais escuro */
+}
+
+/* Botão vermelho */
+button.btn-red, input[type="submit"].btn-red {
+    background: #fc090a; /* Vermelho vivo */
+    color: #fff; /* Letras brancas */
+    font-weight: bold; /* Negrito */
+    text-transform: uppercase; /* Todas maiúsculas */
+}
+
+button.btn-red:hover, input[type="submit"].btn-red:hover {
+    background: #d10909; /* Vermelho mais escuro */
+}
+
+/* Caixa de diálogo */
+.dialog-box {
+    background-color: rgba(223, 252, 237, 0.85); /* Fundo mais sólido */
+    padding: 20px;
+    border-radius: 15px; /* Arredondar as bordas */
+    font-size: 125%; /* Aumentar o tamanho da fonte em 25% */
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.dialog-box label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 125%; /* Aumentar o tamanho da fonte em 25% */
+}
+
+.dialog-box input[type="text"], .dialog-box input[type="number"], .dialog-box select {
+    width: calc(100% - 20px); /* Ajustar a largura */
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 15px; /* Arredondar as bordas */
+    font-size: 125%; /* Aumentar o tamanho da fonte em 25% */
+}
+
+/* Espaçamento entre caixas de diálogo */
+.dialog-box + .dialog-box {
+    margin-top: 20px;
+}
+
+/* Overlay para a caixa de diálogo */
+.popup-overlay {
+    display: none; /* Inicialmente escondido */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escurecido */
+    z-index: 999; /* Para garantir que fique abaixo da caixa de diálogo */
+}
+
+.popup {
+    display: none; /* Inicialmente escondida */
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(223, 252, 237, 0.85); /* Cor com menos transparência */
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Para garantir que fique acima de outros elementos */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+}
+
+.popup h3 {
+    margin-top: 0; /* Remove margem superior do título */
+}
+
+.popup input {
+    width: calc(100% - 22px); /* Mantém a largura dos campos */
+    padding: 10px; /* Aumenta o espaço interno dos campos */
+    margin-bottom: 10px; /* Espaço entre os campos */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px; /* Aumenta o tamanho da fonte dos campos */
+}
+
+.popup button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px; /* Aumenta o tamanho da fonte dos botões */
+    margin-top: 10px; /* Espaço acima do botão */
+}
+
+.btn-pesquisar-popup {
+    background-color: #0a850c; /* Verde vivo */
+}
+
+.btn-fechar {
+    background-color: #fc090a; /* Vermelho vivo */
+}
